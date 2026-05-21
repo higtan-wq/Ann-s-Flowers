@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { categories, getCategoryBySlug } from "@/lib/products";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import WeddingGallery from "@/components/WeddingGallery";
 
 export function generateStaticParams() {
   return categories.map((c) => ({ category: c.slug }));
@@ -50,18 +51,7 @@ export default async function CategoryPage({
                   Contact Us to Start Planning
                 </a>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                {category.products.map((product, i) => (
-                  <div key={i} className="relative aspect-square overflow-hidden rounded-2xl group">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                ))}
-              </div>
+              <WeddingGallery photos={category.products} />
               <div className="text-center mt-12">
                 <p className="text-gray-400 text-sm mb-4">Ready to start planning your perfect day?</p>
                 <a
