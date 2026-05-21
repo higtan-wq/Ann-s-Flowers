@@ -36,7 +36,43 @@ export default async function CategoryPage({
         </div>
 
         <div className="max-w-6xl mx-auto px-4 py-12">
-          {category.products.length === 0 ? (
+          {category.portfolio ? (
+            /* Portfolio gallery layout */
+            <>
+              <div className="text-center mb-10">
+                <p className="text-gray-500 max-w-xl mx-auto mb-6">
+                  Every wedding is one of a kind. Browse our work below for inspiration, then reach out and we&apos;ll design something beautiful just for you.
+                </p>
+                <a
+                  href="/#contact"
+                  className="inline-block bg-[#3D2B7A] text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-[#2d1f5e] transition-colors shadow"
+                >
+                  Contact Us to Start Planning
+                </a>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {category.products.map((product, i) => (
+                  <div key={i} className="relative aspect-square overflow-hidden rounded-2xl group">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="text-center mt-12">
+                <p className="text-gray-400 text-sm mb-4">Ready to start planning your perfect day?</p>
+                <a
+                  href="/#contact"
+                  className="inline-block border-2 border-[#3D2B7A] text-[#3D2B7A] px-8 py-3 rounded-full font-semibold hover:bg-[#3D2B7A] hover:text-white transition-colors"
+                >
+                  Get in Touch
+                </a>
+              </div>
+            </>
+          ) : category.products.length === 0 ? (
             /* Coming soon state */
             <div className="text-center py-24">
               <div className="text-6xl mb-4">🌸</div>

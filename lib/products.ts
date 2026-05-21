@@ -12,6 +12,7 @@ export type Category = {
   description: string;
   image: string;
   color: string;
+  portfolio?: boolean;
   products: Product[];
 };
 
@@ -39,6 +40,7 @@ export const categories: Category[] = [
     description: "Bridal bouquets, centerpieces, and full wedding florals tailored to your vision.",
     image: "/wedding.jpg",
     color: "#3D2B7A",
+    portfolio: true,
     products: [
       { name: "Barn Arch with Floral Pedestals", image: "/wedding-arch-door.jpg" },
       { name: "Garden Candle Centerpiece", image: "/wedding-centerpiece.jpg" },
