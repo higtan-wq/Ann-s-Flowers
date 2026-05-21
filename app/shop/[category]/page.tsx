@@ -73,17 +73,28 @@ export default async function CategoryPage({
                       <p className="text-gray-500 text-sm mb-3">{product.description}</p>
                     )}
                     <div className="flex items-center justify-between">
-                      <span className="text-xl font-bold" style={{ color: category.color }}>
-                        {product.price}
-                      </span>
-                      <a
-                        href={product.squareLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-[#E8472A] text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-[#c73a20] transition-colors"
-                      >
-                        Buy Now
-                      </a>
+                      {product.price && (
+                        <span className="text-xl font-bold" style={{ color: category.color }}>
+                          {product.price}
+                        </span>
+                      )}
+                      {product.squareLink ? (
+                        <a
+                          href={product.squareLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-[#E8472A] text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-[#c73a20] transition-colors ml-auto"
+                        >
+                          Buy Now
+                        </a>
+                      ) : (
+                        <a
+                          href="/#contact"
+                          className="bg-[#1A9B8E] text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-[#157f74] transition-colors ml-auto"
+                        >
+                          Contact Us
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>

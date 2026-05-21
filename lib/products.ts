@@ -1,9 +1,9 @@
 export type Product = {
   name: string;
   description?: string;
-  price: string;
+  price?: string;
   image: string;
-  squareLink: string;
+  squareLink?: string;
 };
 
 export type Category = {
@@ -56,6 +56,9 @@ export const categories: Category[] = [
       { name: "Rustic Remembrance", price: "$150", image: "/rustic-remembrance.png", squareLink: "https://square.link/u/l5p1AuSr" },
       { name: "Blue Skies Remembrance", price: "$175", image: "/blue-skies-remembrance.png", squareLink: "https://square.link/u/a0fthfuS" },
       { name: "Country Garden", price: "$175", image: "/country-garden.png", squareLink: "https://square.link/u/jj4JtmEi" },
+      { name: "Casket Blankets", description: "Contact us for more Info!", image: "/casket-blanket-1.jpg" },
+      { name: "Casket Blankets", description: "Contact us for more Info!", image: "/casket-blanket-2.jpg" },
+      { name: "Casket Blankets", description: "Contact us for more Info!", image: "/casket-blanket-3.jpg" },
     ],
   },
   {
