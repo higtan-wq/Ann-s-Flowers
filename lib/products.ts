@@ -82,7 +82,7 @@ export const categories: Category[] = [
     slug: "silk-flowers",
     name: "Silk Flowers & Arrangements",
     description: "Beautiful silk arrangements perfect for gravesites — lasting tributes that hold up in any weather.",
-    image: "/sympathy.jpg",
+    image: "/silk-flowers-cover.jpg",
     color: "#3D2B7A",
     products: [],
   },
