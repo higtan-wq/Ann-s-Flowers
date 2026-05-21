@@ -35,6 +35,11 @@ export default function Shop() {
                     {c.name}
                   </h3>
                   <p className="text-gray-500 text-sm leading-relaxed">{c.description}</p>
+                  {c.onlineOrdering && (
+                    <span className="inline-block mt-2 text-xs font-semibold text-[#1A9B8E] border border-[#1A9B8E] rounded-full px-3 py-0.5">
+                      Online Ordering Available
+                    </span>
+                  )}
                 </div>
                 <span className="text-2xl ml-3 text-gray-300 group-hover:text-[#E8472A] transition-colors">→</span>
               </div>
