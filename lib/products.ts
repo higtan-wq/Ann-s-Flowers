@@ -47,7 +47,16 @@ export const categories: Category[] = [
     description: "Thoughtful arrangements to honor and comfort during life's most difficult moments.",
     image: "/sympathy.jpg",
     color: "#1A9B8E",
-    products: [],
+    products: [
+      { name: "Heaven's Garden", price: "$100", image: "/heavens-garden.png", squareLink: "https://square.link/u/kXDq6DSI" },
+      { name: "Crimson Tide Tribute", price: "$200", image: "/crimson-tide-tribute.png", squareLink: "https://square.link/u/XOICvZJA" },
+      { name: "Blooming Memories", price: "$200", image: "/blooming-memories.png", squareLink: "https://square.link/u/hRgYdFv1" },
+      { name: "Tiger Pride Tribute", price: "$200", image: "/tiger-pride-tribute.png", squareLink: "https://square.link/u/ZUNTQvFy" },
+      { name: "Forever Sunny", price: "$125", image: "/forever-sunny.png", squareLink: "https://square.link/u/W344qRaR" },
+      { name: "Rustic Remembrance", price: "$150", image: "/rustic-remembrance.png", squareLink: "https://square.link/u/l5p1AuSr" },
+      { name: "Blue Skies Remembrance", price: "$175", image: "/blue-skies-remembrance.png", squareLink: "https://square.link/u/a0fthfuS" },
+      { name: "Country Garden", price: "$175", image: "/country-garden.png", squareLink: "https://square.link/u/jj4JtmEi" },
+    ],
   },
   {
     slug: "potted",
