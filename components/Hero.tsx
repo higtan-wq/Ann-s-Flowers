@@ -6,10 +6,10 @@ export default function Hero() {
       {/* Hero image — replace src with a real photo from the shop */}
       <div className="relative w-full h-[520px] md:h-[640px]">
         <Image
-          src="/logo.jpg"
-          alt="Ann's Flowers & Gifts of Ashland"
+          src="/storefront2.jpg"
+          alt="Ann's Flowers & Gifts of Ashland storefront"
           fill
-          className="object-cover object-center opacity-20"
+          className="object-cover object-center opacity-30"
           priority
         />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">

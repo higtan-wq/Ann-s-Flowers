@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 const photos = [
-  { src: "/storefront.png", alt: "Ann's Flowers storefront in Ashland, AL" },
   { src: "/shop1.jpg", alt: "Flower shop greenhouse with colorful arrangements" },
   { src: "/shop2.jpg", alt: "Handcrafted crochet flower arrangements" },
   { src: "/shop3.jpg", alt: "Wreaths and gifts displayed in the shop" },
