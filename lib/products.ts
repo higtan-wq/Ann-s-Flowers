@@ -109,7 +109,7 @@ export const categories: Category[] = [
     image: "/clothing.jpg",
     color: "#E8472A",
     portfolio: true,
-    portfolioMessage: "This is just a sneak peek of what we have to offer. New clothes come in and out of our store every day — come see us!",
+    portfolioMessage: "This is just a sneak peek of what we have to offer. New clothes come in and sell out of our store every day — come see us!",
     portfolioCta: "Visit Us In Store",
     products: [
       { name: "Mama Tee – Yellow", image: "/clothing-mama-yellow.jpg" },
