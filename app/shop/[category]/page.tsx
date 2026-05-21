@@ -69,7 +69,9 @@ export default async function CategoryPage({
                   </div>
                   <div className="p-5">
                     <h3 className="text-lg font-bold text-[#3D2B7A] mb-1">{product.name}</h3>
-                    <p className="text-gray-500 text-sm mb-3">{product.description}</p>
+                    {product.description && (
+                      <p className="text-gray-500 text-sm mb-3">{product.description}</p>
+                    )}
                     <div className="flex items-center justify-between">
                       <span className="text-xl font-bold" style={{ color: category.color }}>
                         {product.price}

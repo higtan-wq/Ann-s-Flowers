@@ -1,6 +1,6 @@
 export type Product = {
   name: string;
-  description: string;
+  description?: string;
   price: string;
   image: string;
   squareLink: string;
@@ -23,14 +23,14 @@ export const categories: Category[] = [
     image: "/bouquets.jpg",
     color: "#E8472A",
     products: [
-      { name: "Sunset Meadow", description: "A warm, vibrant arrangement bursting with sunset tones.", price: "$65", image: "/bouquets.jpg", squareLink: "https://square.link/u/Xy0vU1h9" },
-      { name: "Southern Sweetheart", description: "A charming Southern-inspired bouquet full of color and character.", price: "$60", image: "/bouquets.jpg", squareLink: "https://square.link/u/vBMKOrOX" },
-      { name: "Daisy Dreams", description: "Cheerful daisies and fresh blooms — light, bright, and beautiful.", price: "$50", image: "/bouquets.jpg", squareLink: "https://square.link/u/UQwJt3gy" },
-      { name: "Blooming Mason Jar", description: "Fresh flowers arranged in a charming mason jar — ready to display.", price: "$25", image: "/bouquets.jpg", squareLink: "https://square.link/u/eYTlVoiE" },
-      { name: "Bloom Where You're Planted", description: "A lush, full arrangement celebrating life and growth.", price: "$75", image: "/bouquets.jpg", squareLink: "https://square.link/u/S5EFHmq5" },
-      { name: "Pretty in Pink", description: "Soft pinks and delicate blooms — a classic feminine arrangement.", price: "$45", image: "/bouquets.jpg", squareLink: "https://square.link/u/HHKqN3F0" },
-      { name: "Lily Lane", description: "Elegant lilies and complementary florals in a stunning arrangement.", price: "$100", image: "/bouquets.jpg", squareLink: "https://square.link/u/eUe9ezy0" },
-      { name: "Mixed Rose Garden", description: "A gorgeous mix of roses in a range of colors — customizable to your preference.", price: "$50–$100", image: "/bouquets.jpg", squareLink: "https://square.link/u/zQ6vIGyF" },
+      { name: "Sunset Meadow", price: "$65", image: "/bouquets.jpg", squareLink: "https://square.link/u/Xy0vU1h9" },
+      { name: "Southern Sweetheart", price: "$60", image: "/bouquets.jpg", squareLink: "https://square.link/u/vBMKOrOX" },
+      { name: "Daisy Dreams", price: "$50", image: "/bouquets.jpg", squareLink: "https://square.link/u/UQwJt3gy" },
+      { name: "Blooming Mason Jar", price: "$25", image: "/bouquets.jpg", squareLink: "https://square.link/u/eYTlVoiE" },
+      { name: "Bloom Where You're Planted", price: "$75", image: "/bouquets.jpg", squareLink: "https://square.link/u/S5EFHmq5" },
+      { name: "Pretty in Pink", price: "$45", image: "/bouquets.jpg", squareLink: "https://square.link/u/HHKqN3F0" },
+      { name: "Lily Lane", price: "$100", image: "/bouquets.jpg", squareLink: "https://square.link/u/eUe9ezy0" },
+      { name: "Mixed Rose Garden", description: "One dozen roses $100 · Half dozen $50", price: "$50–$100", image: "/bouquets.jpg", squareLink: "https://square.link/u/zQ6vIGyF" },
     ],
   },
   {
