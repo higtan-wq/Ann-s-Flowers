@@ -79,6 +79,14 @@ export const categories: Category[] = [
     ],
   },
   {
+    slug: "silk-flowers",
+    name: "Silk Flowers & Arrangements",
+    description: "Beautiful silk arrangements perfect for gravesites — lasting tributes that hold up in any weather.",
+    image: "/sympathy.jpg",
+    color: "#3D2B7A",
+    products: [],
+  },
+  {
     slug: "potted",
     name: "Potted Plants",
     description: "Long-lasting potted plants and seasonal blooms — a gift that keeps on growing.",
