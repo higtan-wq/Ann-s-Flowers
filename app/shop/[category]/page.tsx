@@ -78,6 +78,13 @@ export default async function CategoryPage({
             </div>
           ) : (
             /* Product grid */
+            <>
+              {category.onlineOrdering && (
+                <div className="flex items-center gap-2 mb-6 bg-white border border-[#1A9B8E] rounded-xl px-5 py-3 w-fit shadow-sm">
+                  <span className="text-[#1A9B8E] text-lg">🛒</span>
+                  <span className="text-[#1A9B8E] font-semibold text-sm">Online Ordering Available</span>
+                </div>
+              )}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {category.products.map((product) => (
                 <div
@@ -125,6 +132,7 @@ export default async function CategoryPage({
                 </div>
               ))}
             </div>
+            </>
           )}
         </div>
       </main>

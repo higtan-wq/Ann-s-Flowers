@@ -15,6 +15,7 @@ export type Category = {
   portfolio?: boolean;
   portfolioMessage?: string;
   portfolioCta?: string;
+  onlineOrdering?: boolean;
   products: Product[];
 };
 
@@ -25,6 +26,7 @@ export const categories: Category[] = [
     description: "Hand-crafted fresh arrangements perfect for any occasion. Ask about our seasonal selections.",
     image: "/bouquets.jpg",
     color: "#E8472A",
+    onlineOrdering: true,
     products: [
       { name: "Sunset Meadow", price: "$65", image: "/sunset-meadow.jpg", squareLink: "https://square.link/u/Xy0vU1h9" },
       { name: "Southern Sweetheart", price: "$60", image: "/southern-sweetheart.png", squareLink: "https://square.link/u/vBMKOrOX" },
@@ -64,6 +66,7 @@ export const categories: Category[] = [
     description: "Thoughtful arrangements to honor and comfort during life's most difficult moments.",
     image: "/sympathy.jpg",
     color: "#1A9B8E",
+    onlineOrdering: true,
     products: [
       { name: "Heaven's Garden", price: "$100", image: "/heavens-garden.png", squareLink: "https://square.link/u/kXDq6DSI" },
       { name: "Crimson Tide Tribute", price: "$200", image: "/crimson-tide-tribute.png", squareLink: "https://square.link/u/XOICvZJA" },
