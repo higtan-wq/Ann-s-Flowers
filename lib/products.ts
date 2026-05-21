@@ -13,6 +13,8 @@ export type Category = {
   image: string;
   color: string;
   portfolio?: boolean;
+  portfolioMessage?: string;
+  portfolioCta?: string;
   products: Product[];
 };
 
@@ -41,6 +43,7 @@ export const categories: Category[] = [
     image: "/wedding.jpg",
     color: "#3D2B7A",
     portfolio: true,
+    portfolioMessage: "Every wedding is one of a kind. Browse our work below for inspiration, then reach out and we'll design something beautiful just for you.",
     products: [
       { name: "Barn Arch with Floral Pedestals", image: "/wedding-arch-door.jpg" },
       { name: "Garden Candle Centerpiece", image: "/wedding-centerpiece.jpg" },
@@ -105,7 +108,22 @@ export const categories: Category[] = [
     description: "Unique graphic tees and apparel — fun, casual styles you won't find just anywhere.",
     image: "/clothing.jpg",
     color: "#E8472A",
-    products: [],
+    portfolio: true,
+    portfolioMessage: "This is just a sneak peek of what we have to offer. New clothes come in and out of our store every day — come see us!",
+    portfolioCta: "Visit Us In Store",
+    products: [
+      { name: "Mama Tee – Yellow", image: "/clothing-mama-yellow.jpg" },
+      { name: "I'd Rather Be Thrifting Tee", image: "/clothing-thrifting.jpg" },
+      { name: "Jesus Saves, I Spend Tee", image: "/clothing-jesus-saves.jpg" },
+      { name: "Teacher Tee", image: "/clothing-teacher.jpg" },
+      { name: "Watercolor Cross Tee", image: "/clothing-cross.jpg" },
+      { name: "Cow Print Tee", image: "/clothing-cows.jpg" },
+      { name: "Crabby Beach Tee", image: "/clothing-crabby.jpg" },
+      { name: "AL Leopard Tee", image: "/clothing-al-leopard.jpg" },
+      { name: "Shop Display", image: "/clothing-display.jpg" },
+      { name: "Game Day Tee", image: "/clothing-game-day.jpg" },
+      { name: "Mama Tee – Purple", image: "/clothing-mama-purple.jpg" },
+    ],
   },
   {
     slug: "jewelry",

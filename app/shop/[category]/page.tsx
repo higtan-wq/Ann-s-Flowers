@@ -42,23 +42,22 @@ export default async function CategoryPage({
             <>
               <div className="text-center mb-10">
                 <p className="text-gray-500 max-w-xl mx-auto mb-6">
-                  Every wedding is one of a kind. Browse our work below for inspiration, then reach out and we&apos;ll design something beautiful just for you.
+                  {category.portfolioMessage}
                 </p>
                 <a
                   href="/#contact"
                   className="inline-block bg-[#3D2B7A] text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-[#2d1f5e] transition-colors shadow"
                 >
-                  Contact Us to Start Planning
+                  {category.portfolioCta ?? "Contact Us to Start Planning"}
                 </a>
               </div>
               <WeddingGallery photos={category.products} />
               <div className="text-center mt-12">
-                <p className="text-gray-400 text-sm mb-4">Ready to start planning your perfect day?</p>
                 <a
                   href="/#contact"
                   className="inline-block border-2 border-[#3D2B7A] text-[#3D2B7A] px-8 py-3 rounded-full font-semibold hover:bg-[#3D2B7A] hover:text-white transition-colors"
                 >
-                  Get in Touch
+                  {category.portfolioCta ?? "Get in Touch"}
                 </a>
               </div>
             </>
