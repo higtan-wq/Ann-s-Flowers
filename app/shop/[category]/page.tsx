@@ -92,7 +92,7 @@ export default async function CategoryPage({
                           href="/#contact"
                           className="bg-[#1A9B8E] text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-[#157f74] transition-colors ml-auto"
                         >
-                          Contact Us
+                          Contact Us for a Quote
                         </a>
                       )}
                     </div>
