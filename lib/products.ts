@@ -96,9 +96,7 @@ export const categories: Category[] = [
     image: "/potted-peace-lily.png",
     color: "#3A8A3A",
     products: [
-      { name: "6 Inch Potted Plant", price: "$50", image: "/potted-peace-lily.png" },
-      { name: "8 Inch Potted Plant", price: "$75", image: "/potted-peace-lily.png" },
-      { name: "10 Inch Potted Plant", price: "$100", image: "/potted-peace-lily.png" },
+      { name: "Potted Plants", description: "6 inch $50  ·  8 inch $75  ·  10 inch $100", image: "/potted-peace-lily.png" },
     ],
   },
   {
