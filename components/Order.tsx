@@ -33,7 +33,7 @@ export default function Order() {
               Tell us your occasion, colors, and budget — and let our florist create something uniquely beautiful just for you. No two arrangements are the same.
             </p>
             <a
-              href="#contact"
+              href="/designers-choice"
               className="mt-auto bg-[#1A9B8E] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#147d73] transition-colors"
             >
               Get Started
