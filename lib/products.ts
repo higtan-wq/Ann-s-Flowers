@@ -93,9 +93,13 @@ export const categories: Category[] = [
     slug: "potted",
     name: "Potted Plants",
     description: "Long-lasting potted plants and seasonal blooms — a gift that keeps on growing.",
-    image: "/potted.jpg",
+    image: "/potted-peace-lily.png",
     color: "#3A8A3A",
-    products: [],
+    products: [
+      { name: "6 Inch Potted Plant", price: "$50", image: "/potted-peace-lily.png" },
+      { name: "8 Inch Potted Plant", price: "$75", image: "/potted-peace-lily.png" },
+      { name: "10 Inch Potted Plant", price: "$100", image: "/potted-peace-lily.png" },
+    ],
   },
   {
     slug: "gifts",
