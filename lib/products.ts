@@ -95,8 +95,9 @@ export const categories: Category[] = [
     description: "Long-lasting potted plants and seasonal blooms — a gift that keeps on growing.",
     image: "/potted-peace-lily.png",
     color: "#3A8A3A",
+    onlineOrdering: true,
     products: [
-      { name: "Potted Plants", description: "6 inch $50  ·  8 inch $75  ·  10 inch $100", image: "/potted-peace-lily.png" },
+      { name: "Green Plants", description: "6 inch · $50  ·  8 inch · $75  ·  10 inch · $100", image: "/potted-peace-lily.png", squareLink: "https://square.link/u/yqGDqZes" },
     ],
   },
   {
