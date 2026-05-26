@@ -4,25 +4,31 @@ import { useState } from "react";
 import Image from "next/image";
 import { Category, Product } from "@/lib/products";
 
-type DeliveryState = { product: Product; squareLink: string } | null;
+type ModalState = { product: Product; squareLink: string; type: "pickup" | "delivery" } | null;
 
 export default function ProductGrid({ category }: { category: Category }) {
-  const [delivery, setDelivery] = useState<DeliveryState>(null);
+  const [modal, setModal] = useState<ModalState>(null);
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
 
-  async function handleDeliverySubmit(e: React.FormEvent) {
+  function openModal(product: Product, type: "pickup" | "delivery") {
+    setName(""); setPhone(""); setAddress("");
+    setModal({ product, squareLink: product.squareLink!, type });
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    await fetch("/api/delivery-order", {
+    const endpoint = modal!.type === "delivery" ? "/api/delivery-order" : "/api/pickup-order";
+    await fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, phone, address, productName: delivery?.product.name }),
+      body: JSON.stringify({ name, phone, address, productName: modal?.product.name }),
     });
     setLoading(false);
-    window.location.href = delivery!.squareLink;
+    window.location.href = modal!.squareLink;
   }
 
   return (
@@ -49,16 +55,14 @@ export default function ProductGrid({ category }: { category: Category }) {
                 )}
                 {product.squareLink ? (
                   <div className="flex gap-2 ml-auto">
-                    <a
-                      href={product.squareLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
+                      onClick={() => openModal(product, "pickup")}
                       className="bg-[#E8472A] text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-[#c73a20] transition-colors"
                     >
                       Pickup
-                    </a>
+                    </button>
                     <button
-                      onClick={() => setDelivery({ product, squareLink: product.squareLink! })}
+                      onClick={() => openModal(product, "delivery")}
                       className="bg-[#3D2B7A] text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-[#2d1f5e] transition-colors"
                     >
                       Delivery
@@ -78,12 +82,14 @@ export default function ProductGrid({ category }: { category: Category }) {
         ))}
       </div>
 
-      {delivery && (
+      {modal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
           <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-xl">
-            <h2 className="text-xl font-bold text-[#3D2B7A] mb-1">Order Delivery</h2>
-            <p className="text-gray-500 text-sm mb-6">{delivery.product.name}</p>
-            <form onSubmit={handleDeliverySubmit} className="space-y-4">
+            <h2 className="text-xl font-bold text-[#3D2B7A] mb-1">
+              {modal.type === "pickup" ? "Order Pickup" : "Order Delivery"}
+            </h2>
+            <p className="text-gray-500 text-sm mb-6">{modal.product.name}</p>
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-semibold text-[#3D2B7A] mb-1">Name *</label>
                 <input
@@ -100,18 +106,20 @@ export default function ProductGrid({ category }: { category: Category }) {
                   className="w-full border border-[#f0e8dc] rounded-xl px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#3D2B7A]"
                 />
               </div>
-              <div>
-                <label className="block text-sm font-semibold text-[#3D2B7A] mb-1">Delivery Address *</label>
-                <input
-                  required type="text" value={address} onChange={(e) => setAddress(e.target.value)}
-                  placeholder="Street address, city, state, zip"
-                  className="w-full border border-[#f0e8dc] rounded-xl px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#3D2B7A]"
-                />
-              </div>
+              {modal.type === "delivery" && (
+                <div>
+                  <label className="block text-sm font-semibold text-[#3D2B7A] mb-1">Delivery Address *</label>
+                  <input
+                    required type="text" value={address} onChange={(e) => setAddress(e.target.value)}
+                    placeholder="Street address, city, state, zip"
+                    className="w-full border border-[#f0e8dc] rounded-xl px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#3D2B7A]"
+                  />
+                </div>
+              )}
               <div className="flex gap-3 pt-2">
                 <button
                   type="button"
-                  onClick={() => setDelivery(null)}
+                  onClick={() => setModal(null)}
                   className="flex-1 border-2 border-[#3D2B7A] text-[#3D2B7A] py-3 rounded-full font-semibold hover:bg-[#3D2B7A] hover:text-white transition-colors"
                 >
                   Cancel
