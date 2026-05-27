@@ -19,17 +19,19 @@ export default function ProductGrid({ category }: { category: Category }) {
     setModal({ product, squareLink: product.squareLink!, type });
   }
 
-  async function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    const endpoint = modal!.type === "delivery" ? "/api/delivery-order" : "/api/pickup-order";
-    await fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, phone, address, cardMessage, productName: modal?.product.name }),
+    const params = new URLSearchParams({
+      name,
+      phone,
+      product: modal!.product.name,
+      type: modal!.type,
+      ...(modal!.type === "delivery" && address ? { address } : {}),
+      ...(cardMessage ? { card: cardMessage } : {}),
     });
-    setLoading(false);
-    window.location.href = modal!.squareLink;
+    const returnUrl = `${window.location.origin}/order-complete?${params.toString()}`;
+    window.location.href = `${modal!.squareLink}?return_url=${encodeURIComponent(returnUrl)}`;
   }
 
   return (
