@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
     `${process.env.OWNER_PHONE_1}@txt.att.net`,
     `${process.env.OWNER_PHONE_2}@txt.att.net`,
   ];
-  const { name, phone, address, productName } = await req.json();
+  const { name, phone, address, cardMessage, productName } = await req.json();
 
   const text = [
     `Delivery Order - Ann's Flowers`,
@@ -15,7 +15,8 @@ export async function POST(req: NextRequest) {
     `Name: ${name}`,
     `Phone: ${phone}`,
     `Address: ${address}`,
-  ].join("\n");
+    cardMessage ? `Card: ${cardMessage}` : null,
+  ].filter(Boolean).join("\n");
 
   await resend.emails.send({
     from: "orders@annsflowersashland.com",

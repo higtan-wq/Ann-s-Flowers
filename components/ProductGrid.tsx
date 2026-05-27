@@ -12,9 +12,10 @@ export default function ProductGrid({ category }: { category: Category }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [cardMessage, setCardMessage] = useState("");
 
   function openModal(product: Product, type: "pickup" | "delivery") {
-    setName(""); setPhone(""); setAddress("");
+    setName(""); setPhone(""); setAddress(""); setCardMessage("");
     setModal({ product, squareLink: product.squareLink!, type });
   }
 
@@ -25,7 +26,7 @@ export default function ProductGrid({ category }: { category: Category }) {
     await fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, phone, address, productName: modal?.product.name }),
+      body: JSON.stringify({ name, phone, address, cardMessage, productName: modal?.product.name }),
     });
     setLoading(false);
     window.location.href = modal!.squareLink;
@@ -116,6 +117,17 @@ export default function ProductGrid({ category }: { category: Category }) {
                   />
                 </div>
               )}
+              <div>
+                <label className="block text-sm font-semibold text-[#3D2B7A] mb-1">
+                  Card Message <span className="text-gray-400 font-normal">(optional)</span>
+                </label>
+                <textarea
+                  value={cardMessage} onChange={(e) => setCardMessage(e.target.value)}
+                  rows={3}
+                  placeholder="Write a message for the card..."
+                  className="w-full border border-[#f0e8dc] rounded-xl px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#3D2B7A] resize-none"
+                />
+              </div>
               <div className="flex gap-3 pt-2">
                 <button
                   type="button"
