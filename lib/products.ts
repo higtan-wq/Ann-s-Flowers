@@ -32,7 +32,7 @@ export const categories: Category[] = [
       { name: "Southern Sweetheart", price: "$60", image: "/southern-sweetheart.png", squareLink: "https://square.link/u/LkN0vyap" },
       { name: "Daisy Dreams", price: "$50", image: "/daisy-dreams.png", squareLink: "https://square.link/u/izc5sjhJ" },
       { name: "Blooming Mason Jar", price: "$25", image: "/blooming-mason-jar.png", squareLink: "https://square.link/u/QBFziVYM" },
-      { name: "Bloom Where You're Planted", price: "$75", image: "/bloom-where-youre-planted.jpg", squareLink: "https://square.link/u/LWuwsQ7k" },
+      { name: "Bloom Where You're Planted", price: "$75", image: "/bloom-where-youre-planted.jpg", squareLink: "https://square.link/u/TOkke4ik" },
       { name: "Pretty in Pink", price: "$45", image: "/pretty-in-pink.png", squareLink: "https://square.link/u/NmTlxXjv" },
       { name: "Lily Lane", price: "$100", image: "/lily-lane.png", squareLink: "https://square.link/u/jiU33OiW" },
       { name: "Mixed Rose Garden", description: "One dozen roses $100 · Half dozen $50", price: "$50–$100", image: "/mixed-rose-garden.png", squareLink: "https://square.link/u/iLcoSvFA" },
