@@ -1,16 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
+
+async function sendSms(phone: string, message: string) {
+  await fetch("https://textbelt.com/text", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ phone, message, key: process.env.TEXTBELT_API_KEY }),
+  });
+}
 
 export async function POST(req: NextRequest) {
-  const resend = new Resend(process.env.RESEND_API_KEY);
-  const RECIPIENTS = [
-    `${process.env.OWNER_PHONE_1}@txt.att.net`,
-    `${process.env.OWNER_PHONE_2}@txt.att.net`,
-  ];
   const { name, phone, product, type, address, card } = await req.json();
 
-  const text = [
-    `${type === "delivery" ? "Delivery" : "Pickup"} Order - Ann's Flowers`,
+  const message = [
+    `Ann's Flowers - ${type === "delivery" ? "Delivery" : "Pickup"} Order`,
     `Item: ${product}`,
     `Name: ${name}`,
     `Phone: ${phone}`,
@@ -18,12 +20,10 @@ export async function POST(req: NextRequest) {
     card ? `Card: ${card}` : null,
   ].filter(Boolean).join("\n");
 
-  await resend.emails.send({
-    from: "orders@annsflowersashland.com",
-    to: RECIPIENTS,
-    subject: `${type === "delivery" ? "Delivery" : "Pickup"} Order: ${product} - ${name}`,
-    text,
-  });
+  await Promise.all([
+    sendSms(process.env.OWNER_PHONE_1!, message),
+    sendSms(process.env.OWNER_PHONE_2!, message),
+  ]);
 
   return NextResponse.json({ ok: true });
 }

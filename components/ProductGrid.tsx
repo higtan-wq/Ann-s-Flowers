@@ -166,6 +166,11 @@ export default function ProductGrid({ category }: { category: Category }) {
                   className="w-full border border-[#f0e8dc] rounded-xl px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#3D2B7A] resize-none"
                 />
               </div>
+              {modal.type === "pickup" && (
+                <p className="text-sm text-[#1A9B8E] bg-[#f0faf9] border border-[#1A9B8E] rounded-xl px-4 py-3">
+                  Payment is due in store when you come to pick up your order.
+                </p>
+              )}
               <div className="flex gap-3 pt-2">
                 <button
                   type="button"
