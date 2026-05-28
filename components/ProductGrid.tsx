@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Category, Product } from "@/lib/products";
 
+const DELIVERY_ZIPS = new Set(["36251","35072","35160","36255","36256","36258","36266","36276","35161","36278"]);
+
 type ModalState = { product: Product; squareLink: string; type: "pickup" | "delivery" } | null;
 
 export default function ProductGrid({ category }: { category: Category }) {
@@ -14,10 +16,12 @@ export default function ProductGrid({ category }: { category: Category }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [zip, setZip] = useState("");
+  const [zipError, setZipError] = useState("");
   const [cardMessage, setCardMessage] = useState("");
 
   function openModal(product: Product, type: "pickup" | "delivery") {
-    setName(""); setPhone(""); setAddress(""); setCardMessage("");
+    setName(""); setPhone(""); setAddress(""); setZip(""); setZipError(""); setCardMessage("");
     setPickupSuccess(false);
     setModal({ product, squareLink: product.squareLink!, type });
   }
@@ -25,6 +29,12 @@ export default function ProductGrid({ category }: { category: Category }) {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
+
+    if (modal!.type === "delivery" && !DELIVERY_ZIPS.has(zip.trim())) {
+      setZipError("Sorry, your zip code is outside our delivery area. We currently only deliver to select zip codes in Clay County and surrounding areas. Please call us at (256) 354-2613 for more information.");
+      setLoading(false);
+      return;
+    }
 
     if (modal!.type === "pickup") {
       await fetch("/api/notify-order", {
@@ -40,7 +50,7 @@ export default function ProductGrid({ category }: { category: Category }) {
         phone,
         product: modal!.product.name,
         type: "delivery",
-        ...(address ? { address } : {}),
+        ...(address ? { address: `${address}, ${zip}` } : {}),
         ...(cardMessage ? { card: cardMessage } : {}),
       });
       const returnUrl = `${window.location.origin}/order-complete?${params.toString()}`;
@@ -124,14 +134,26 @@ export default function ProductGrid({ category }: { category: Category }) {
                 />
               </div>
               {modal.type === "delivery" && (
-                <div>
-                  <label className="block text-sm font-semibold text-[#3D2B7A] mb-1">Delivery Address *</label>
-                  <input
-                    required type="text" value={address} onChange={(e) => setAddress(e.target.value)}
-                    placeholder="Street address, city, state, zip"
-                    className="w-full border border-[#f0e8dc] rounded-xl px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#3D2B7A]"
-                  />
-                </div>
+                <>
+                  <div>
+                    <label className="block text-sm font-semibold text-[#3D2B7A] mb-1">Delivery Address *</label>
+                    <input
+                      required type="text" value={address} onChange={(e) => setAddress(e.target.value)}
+                      placeholder="Street address, city, state"
+                      className="w-full border border-[#f0e8dc] rounded-xl px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#3D2B7A]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-[#3D2B7A] mb-1">Zip Code *</label>
+                    <input
+                      required type="text" value={zip} onChange={(e) => { setZip(e.target.value); setZipError(""); }}
+                      placeholder="12345"
+                      maxLength={5}
+                      className={`w-full border rounded-xl px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#3D2B7A] ${zipError ? "border-red-400" : "border-[#f0e8dc]"}`}
+                    />
+                    {zipError && <p className="text-red-500 text-sm mt-2">{zipError}</p>}
+                  </div>
+                </>
               )}
               <div>
                 <label className="block text-sm font-semibold text-[#3D2B7A] mb-1">
