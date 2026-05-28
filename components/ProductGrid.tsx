@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Category, Product } from "@/lib/products";
 
 type ModalState = { product: Product; squareLink: string; type: "pickup" | "delivery" } | null;
@@ -9,6 +10,7 @@ type ModalState = { product: Product; squareLink: string; type: "pickup" | "deli
 export default function ProductGrid({ category }: { category: Category }) {
   const [modal, setModal] = useState<ModalState>(null);
   const [loading, setLoading] = useState(false);
+  const [pickupSuccess, setPickupSuccess] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
@@ -16,22 +18,34 @@ export default function ProductGrid({ category }: { category: Category }) {
 
   function openModal(product: Product, type: "pickup" | "delivery") {
     setName(""); setPhone(""); setAddress(""); setCardMessage("");
+    setPickupSuccess(false);
     setModal({ product, squareLink: product.squareLink!, type });
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    const params = new URLSearchParams({
-      name,
-      phone,
-      product: modal!.product.name,
-      type: modal!.type,
-      ...(modal!.type === "delivery" && address ? { address } : {}),
-      ...(cardMessage ? { card: cardMessage } : {}),
-    });
-    const returnUrl = `${window.location.origin}/order-complete?${params.toString()}`;
-    window.location.href = `${modal!.squareLink}?return_url=${encodeURIComponent(returnUrl)}`;
+
+    if (modal!.type === "pickup") {
+      await fetch("/api/notify-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone, card: cardMessage, product: modal!.product.name, type: "pickup" }),
+      });
+      setLoading(false);
+      setPickupSuccess(true);
+    } else {
+      const params = new URLSearchParams({
+        name,
+        phone,
+        product: modal!.product.name,
+        type: "delivery",
+        ...(address ? { address } : {}),
+        ...(cardMessage ? { card: cardMessage } : {}),
+      });
+      const returnUrl = `${window.location.origin}/order-complete?${params.toString()}`;
+      window.location.href = `${modal!.squareLink}?return_url=${encodeURIComponent(returnUrl)}`;
+    }
   }
 
   return (
@@ -85,7 +99,7 @@ export default function ProductGrid({ category }: { category: Category }) {
         ))}
       </div>
 
-      {modal && (
+      {modal && !pickupSuccess && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
           <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-xl">
             <h2 className="text-xl font-bold text-[#3D2B7A] mb-1">
@@ -143,10 +157,29 @@ export default function ProductGrid({ category }: { category: Category }) {
                   disabled={loading}
                   className="flex-1 bg-[#3D2B7A] text-white py-3 rounded-full font-semibold hover:bg-[#2d1f5e] transition-colors disabled:opacity-60"
                 >
-                  {loading ? "Sending..." : "Continue to Payment"}
+                  {loading ? "Sending..." : modal.type === "pickup" ? "Place Order" : "Continue to Payment"}
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {pickupSuccess && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
+          <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-xl text-center">
+            <div className="text-5xl mb-4">🌸</div>
+            <h2 className="text-xl font-bold text-[#3D2B7A] mb-2">Order Received!</h2>
+            <p className="text-gray-500 mb-6">
+              We&apos;ll give you a call to confirm your order. Pay when you come in to pick up. Thank you for choosing Ann&apos;s Flowers!
+            </p>
+            <Link
+              href="/"
+              onClick={() => setPickupSuccess(false)}
+              className="inline-block bg-[#3D2B7A] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#2d1f5e] transition-colors"
+            >
+              Back to Home
+            </Link>
           </div>
         </div>
       )}
