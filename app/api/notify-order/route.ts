@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 
 async function sendSms(phone: string, message: string) {
-  await fetch("https://textbelt.com/text", {
+  const res = await fetch("https://textbelt.com/text", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ phone, message, key: process.env.TEXTBELT_API_KEY }),
   });
+  const json = await res.json();
+  console.log(`[textbelt] ${phone}:`, json);
 }
 
 export async function POST(req: NextRequest) {
