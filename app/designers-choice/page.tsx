@@ -37,9 +37,14 @@ export default function DesignersChoicePage() {
           <div className="text-center max-w-md">
             <div className="text-6xl mb-4">🌸</div>
             <h2 className="text-2xl font-bold text-[#3D2B7A] mb-3">We Got Your Order!</h2>
-            <p className="text-gray-500 mb-8">
+            <p className="text-gray-500 mb-4">
               We&apos;ll be in touch shortly to confirm your arrangement. Thank you for choosing Ann&apos;s Flowers!
             </p>
+            {fulfillment === "delivery" && (
+              <p className="text-sm text-[#1A9B8E] bg-[#f0faf9] border border-[#c5ede9] rounded-xl px-4 py-3 mb-8">
+                For delivery orders, we&apos;ll send a payment link to your phone number once your arrangement is confirmed.
+              </p>
+            )}
             <Link
               href="/"
               className="inline-block bg-[#3D2B7A] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#2d1f5e] transition-colors"
@@ -90,22 +95,6 @@ export default function DesignersChoicePage() {
                 placeholder="(555) 555-5555"
                 className="w-full border border-[#f0e8dc] rounded-xl px-4 py-3 text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-[#3D2B7A]"
               />
-            </div>
-
-            {/* Email */}
-            <div>
-              <label className="block text-sm font-semibold text-[#3D2B7A] mb-1">
-                Email Address {fulfillment === "delivery" ? "*" : <span className="text-gray-400 font-normal">(optional)</span>}
-              </label>
-              <input
-                name="email" type="email"
-                required={fulfillment === "delivery"}
-                placeholder="you@example.com"
-                className="w-full border border-[#f0e8dc] rounded-xl px-4 py-3 text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-[#3D2B7A]"
-              />
-              {fulfillment === "delivery" && (
-                <p className="text-xs text-gray-400 mt-1">We&apos;ll send your invoice here so you can pay online.</p>
-              )}
             </div>
 
             {/* Occasion */}
