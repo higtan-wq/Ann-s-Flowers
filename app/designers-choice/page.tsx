@@ -92,6 +92,22 @@ export default function DesignersChoicePage() {
               />
             </div>
 
+            {/* Email */}
+            <div>
+              <label className="block text-sm font-semibold text-[#3D2B7A] mb-1">
+                Email Address {fulfillment === "delivery" ? "*" : <span className="text-gray-400 font-normal">(optional)</span>}
+              </label>
+              <input
+                name="email" type="email"
+                required={fulfillment === "delivery"}
+                placeholder="you@example.com"
+                className="w-full border border-[#f0e8dc] rounded-xl px-4 py-3 text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-[#3D2B7A]"
+              />
+              {fulfillment === "delivery" && (
+                <p className="text-xs text-gray-400 mt-1">We&apos;ll send your invoice here so you can pay online.</p>
+              )}
+            </div>
+
             {/* Occasion */}
             <div>
               <label className="block text-sm font-semibold text-[#3D2B7A] mb-1">Occasion *</label>

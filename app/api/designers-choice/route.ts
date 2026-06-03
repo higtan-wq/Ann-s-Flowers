@@ -11,12 +11,13 @@ async function sendSms(phone: string, message: string) {
 }
 
 export async function POST(req: NextRequest) {
-  const { name, phone, occasion, colors, flowerType, budget, fulfillment, address, cardMessage } = await req.json();
+  const { name, phone, email, occasion, colors, flowerType, budget, fulfillment, address, cardMessage } = await req.json();
 
   const message = [
     `Ann's Flowers - Designer's Choice Order`,
     `Name: ${name}`,
     `Phone: ${phone}`,
+    email ? `Email: ${email}` : null,
     `Occasion: ${occasion}`,
     `Budget: $${budget}`,
     `Fulfillment: ${fulfillment === "delivery" ? `Delivery to ${address}` : "Pickup"}`,
