@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isStoreOpen } from "@/lib/hours";
 
 async function sendSms(phone: string, message: string) {
   const res = await fetch("https://textbelt.com/text", {
@@ -11,6 +12,9 @@ async function sendSms(phone: string, message: string) {
 }
 
 export async function POST(req: NextRequest) {
+  if (!isStoreOpen()) {
+    return NextResponse.json({ ok: false, error: "Store is currently closed." }, { status: 503 });
+  }
   const { name, phone, occasion, colors, flowerType, budget, fulfillment, address, cardMessage } = await req.json();
 
   const message = [

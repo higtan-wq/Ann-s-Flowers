@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { isStoreOpen } from "@/lib/hours";
+import StoreClosedBanner from "@/components/StoreClosedBanner";
 
 const OCCASIONS = [
   "Birthday", "Anniversary", "Sympathy", "Wedding",
@@ -28,6 +30,8 @@ export default function DesignersChoicePage() {
     setLoading(false);
     setSubmitted(true);
   }
+
+  const storeOpen = isStoreOpen();
 
   if (submitted) {
     return (
@@ -75,6 +79,7 @@ export default function DesignersChoicePage() {
         </div>
 
         <div className="max-w-2xl mx-auto px-4 py-12">
+          {!storeOpen && <StoreClosedBanner />}
           <form onSubmit={handleSubmit} className="space-y-6">
 
             {/* Name */}
@@ -203,8 +208,8 @@ export default function DesignersChoicePage() {
 
             <button
               type="submit"
-              disabled={loading}
-              className="w-full bg-[#3D2B7A] text-white py-4 rounded-full font-semibold text-lg hover:bg-[#2d1f5e] transition-colors disabled:opacity-60"
+              disabled={loading || !storeOpen}
+              className="w-full bg-[#3D2B7A] text-white py-4 rounded-full font-semibold text-lg hover:bg-[#2d1f5e] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {loading ? "Sending..." : "Submit Order"}
             </button>

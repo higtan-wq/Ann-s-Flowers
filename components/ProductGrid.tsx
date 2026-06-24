@@ -4,12 +4,15 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Category, Product } from "@/lib/products";
+import { isStoreOpen } from "@/lib/hours";
+import StoreClosedBanner from "@/components/StoreClosedBanner";
 
 const DELIVERY_ZIPS = new Set(["36251","35072","35160","36255","36256","36258","36266","36276","35161","36278"]);
 
 type ModalState = { product: Product; squareLink: string; type: "pickup" | "delivery" } | null;
 
 export default function ProductGrid({ category }: { category: Category }) {
+  const storeOpen = isStoreOpen();
   const [modal, setModal] = useState<ModalState>(null);
   const [loading, setLoading] = useState(false);
   const [pickupSuccess, setPickupSuccess] = useState(false);
@@ -60,6 +63,7 @@ export default function ProductGrid({ category }: { category: Category }) {
 
   return (
     <>
+      {!storeOpen && <StoreClosedBanner />}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {category.products.map((product) => (
           <div
@@ -80,7 +84,7 @@ export default function ProductGrid({ category }: { category: Category }) {
                     {product.price}
                   </span>
                 )}
-                {product.squareLink ? (
+                {product.squareLink && storeOpen ? (
                   <div className="flex gap-2 ml-auto">
                     <button
                       onClick={() => openModal(product, "pickup")}
@@ -95,14 +99,14 @@ export default function ProductGrid({ category }: { category: Category }) {
                       Delivery
                     </button>
                   </div>
-                ) : (
+                ) : !product.squareLink ? (
                   <a
                     href="/#contact"
                     className="bg-[#1A9B8E] text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-[#157f74] transition-colors ml-auto"
                   >
                     Contact Us for a Quote
                   </a>
-                )}
+                ) : null}
               </div>
             </div>
           </div>
