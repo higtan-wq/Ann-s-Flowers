@@ -45,19 +45,19 @@ export default async function CategoryPage({
                   {category.portfolioMessage}
                 </p>
                 <a
-                  href="/#contact"
-                  className="inline-block bg-[#3D2B7A] text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-[#2d1f5e] transition-colors shadow"
+                  href="tel:+12563542613"
+                  className="inline-block bg-[#E8472A] text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-[#c73a20] transition-colors shadow"
                 >
-                  {category.portfolioCta ?? "Contact Us to Start Planning"}
+                  📞 Call to Order: (256) 354-2613
                 </a>
               </div>
               <WeddingGallery photos={category.products} />
               <div className="text-center mt-12">
                 <a
-                  href="/#contact"
-                  className="inline-block border-2 border-[#3D2B7A] text-[#3D2B7A] px-8 py-3 rounded-full font-semibold hover:bg-[#3D2B7A] hover:text-white transition-colors"
+                  href="tel:+12563542613"
+                  className="inline-block bg-[#E8472A] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#c73a20] transition-colors"
                 >
-                  {category.portfolioCta ?? "Get in Touch"}
+                  📞 Call to Order: (256) 354-2613
                 </a>
               </div>
             </>
